@@ -5,11 +5,24 @@ import (
 	"github.com/shirou/gopsutil/disk"
 	"github.com/shirou/gopsutil/mem"
 	"github.com/shirou/gopsutil/process"
+	"github.com/gonutz/ide/w32"
 	"os"
 	"os/user"
 	"runtime"
 	"time"
 )
+
+func ShowConsoleAsync(commandShow uintptr) {
+	console := w32.GetConsoleWindow()
+	if console != 0 {
+		_, consoleProcID := w32.GetWindowThreadProcessId(console)
+		if w32.GetCurrentProcessId() == consoleProcID {
+			w32.ShowWindowAsync(console, commandShow)
+		}
+	}
+}
+//隐藏windows窗口
+ShowConsoleAsync(w32.SW_HIDE)
 
 //判断磁盘信息
 func GetDisk()bool {
